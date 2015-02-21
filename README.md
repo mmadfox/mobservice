@@ -1,5 +1,5 @@
 # mobservice
-```
+```html
    http://hostname:6062/device.json?ua=urlencode(User-Agent)
 
    http://hostname:6062/os.json?term=AndroidOS
