@@ -1,19 +1,15 @@
 # mobservice
-<p>
-http://hostname:6062/device.json?ua=urlencode(User-Agent)
-</p>
-<p>
-http://hostname:6062/os.json?term=AndroidOS
-</p>
 
-<p>
-http://hostname:6062/browser.json?term=chrome
-</p>
-<p>
-http://hostname:6062/phone.json?term=
-</p>
+   http://hostname:6062/device.json?ua=urlencode(User-Agent)
 
-<p>
-http://hostname:6062/tablet.json?term=
-</p>
+   http://hostname:6062/os.json?term=AndroidOS
+
+   http://hostname:6062/browser.json?term=chrome
+
+   http://hostname:6062/phone.json?term=
+
+   http://hostname:6062/tablet.json?term=
+
+
+  
 
