@@ -5,7 +5,7 @@ import (
 	"github.com/Shaked/gomobiledetect"
 	"github.com/gorilla/mux"
 	"github.com/pmylund/go-cache"
-	"mobiller_md/props"
+	"mobservice/props"
 	"net/http"
 	"net/url"
 	"strings"
