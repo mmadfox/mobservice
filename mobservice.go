@@ -15,7 +15,7 @@ import (
 var c *cache.Cache
 
 func init() {
-	c = cache.New(time.Hour*2, time.Minute*5)
+	c = cache.New(time.Hour*12, time.Minute*25)
 }
 
 func getCache() *cache.Cache {
@@ -47,10 +47,13 @@ func DeviceHandler(w http.ResponseWriter, r *http.Request) {
 		m.SetUserAgent(userAgent)
 		device = props.NewDevice()
 		device.Configure(m)
-		getCache().Set(cid, device, 0)
+
+		if device.IsMobile {
+			getCache().Set(cid, device, 0)
+		}
 	}
 
-	js, err := json.Marshal(&device)
+	js, err := json.Marshal(device)
 
 	if err != nil {
 		http.Error(w, err.Error(), http.StatusInternalServerError)
