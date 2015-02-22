@@ -1,6 +1,6 @@
 #!/bin/sh
 
-MOBSERVICE=/usr/local/bin/mobservice
+MOBSERVICE=$HOME/go/bin/mobservice
 CMD="$1"
 
 PID=`ps -ax | grep  mobservice$ | awk -F ' ' '{print $1}'`
