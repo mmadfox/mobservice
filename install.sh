@@ -9,6 +9,7 @@ go build $DIR/mobservice.go
 chmod a+x $DIR/mobservice
 cp $DIR/mobservice $DIR/../../bin/mobservice
 cp $DIR/rc.d/mobservicectl $DIR/../../bin/mobservicectl
+echo "Done!"
 
 
 
