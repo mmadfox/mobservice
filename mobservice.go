@@ -38,20 +38,20 @@ func DeviceHandler(w http.ResponseWriter, r *http.Request) {
 	userAgent = strings.Trim(userAgent, " ")
 
 	var device *props.Device
-	var cid string = "ua" + userAgent
+	//var cid string = "ua" + userAgent
 
-	if fromCache, found := getCache().Get(cid); found {
-		device = fromCache.(*props.Device)
-	} else {
-		m := mobiledetect.NewMobileDetect(r, nil)
-		m.SetUserAgent(userAgent)
-		device = props.NewDevice()
-		device.Configure(m)
+	//if fromCache, found := getCache().Get(cid); found {
+	//	device = fromCache.(*props.Device)
+	//} else {
+	m := mobiledetect.NewMobileDetect(r, nil)
+	m.SetUserAgent(userAgent)
+	device = props.NewDevice()
+	device.Configure(m)
 
-		if device.IsMobile {
-			getCache().Set(cid, device, 0)
-		}
-	}
+	//if device.IsMobile {
+	//	getCache().Set(cid, device, 0)
+	//}
+	//}
 
 	js, err := json.Marshal(device)
 
