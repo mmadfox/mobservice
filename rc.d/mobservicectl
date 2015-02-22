@@ -1,0 +1,48 @@
+#!/bin/sh
+
+MOBSERVICE=/usr/local/bin/mobservice
+CMD="$1"
+
+PID=`ps -ax | grep  mobservice$ | awk -F ' ' '{print $1}'`
+
+if [ "x$PID" != "x" ] && kill -0 $PID 2>/dev/null ; then
+        RUN=1
+else
+        RUN=0
+fi
+
+case $CMD in
+start)
+        if [ $RUN -eq 1 ]; then
+                echo "$0 $CMD: mobservice (pid $PID) already running"
+                exit 1
+        fi
+        
+        if  $MOBSERVICE & > /dev/null 2>&1; then
+            echo "$0 $CMD: mobservice started"
+        else
+            echo "$0 $CMD: mobservice could not be started"
+        fi
+        ;;
+stop)
+        if [ $RUN -eq 0 ]; then
+                echo "$0 $CMD: mobservice not running"
+                exit 1
+        fi
+        if kill $PID ; then
+                echo "$0 $CMD: mobservice stopped"
+        else
+                echo "$0 $CMD: mobservice could not be stopped"
+        fi
+        ;;
+
+*)
+        echo "usage: $0 (start|stop)"
+        cat <<EOF
+
+start      - start mobservice
+stop       - stop mobservice
+
+EOF
+
+esac
