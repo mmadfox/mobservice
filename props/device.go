@@ -35,7 +35,7 @@ func (d *Device) Configure(m *mobiledetect.MobileDetect) {
 		detectOs(m, d)
 		detectBrowser(m, d)
 		detectType(m, d)
-		detectGrade(m, d)
+		d.Grade = m.MobileGrade()
 	}
 }
 
@@ -46,10 +46,6 @@ func detectOs(m *mobiledetect.MobileDetect, d *Device) {
 			break
 		}
 	}
-}
-
-func detectGrade(m *mobiledetect.MobileDetect, d *Device) {
-	d.Grade = m.MobileGrade()
 }
 
 func detectBrowser(m *mobiledetect.MobileDetect, d *Device) {
