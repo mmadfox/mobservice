@@ -15,7 +15,7 @@ import (
 var c *cache.Cache
 
 func init() {
-	c = cache.New(time.Hour*48, time.Minute*30)
+	c = cache.New(time.Hour*2, time.Minute*5)
 }
 
 func getCache() *cache.Cache {

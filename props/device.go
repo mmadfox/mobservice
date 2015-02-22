@@ -19,10 +19,24 @@ func NewDevice() *Device {
 }
 
 func (d *Device) Configure(m *mobiledetect.MobileDetect) {
-	detectOs(m, d)
-	detectBrowser(m, d)
-	detectType(m, d)
-	detectGrade(m, d)
+	isPhone := m.IsMobile()
+	isTablet := m.IsTablet()
+
+	if isPhone || isTablet {
+		d.IsMobile = true
+		d.Prop = "phone"
+
+		if isPhone {
+			d.Prop = "phone"
+		} else if isTablet {
+			d.Prop = "tablet"
+		}
+
+		detectOs(m, d)
+		detectBrowser(m, d)
+		detectType(m, d)
+		detectGrade(m, d)
+	}
 }
 
 func detectOs(m *mobiledetect.MobileDetect, d *Device) {
@@ -48,32 +62,21 @@ func detectBrowser(m *mobiledetect.MobileDetect, d *Device) {
 }
 
 func detectType(m *mobiledetect.MobileDetect, d *Device) {
-	found := false
-	if m.IsMobile() {
-		d.IsMobile = true
+	if d.Prop == "phone" {
 		for key, gob := range mapmob {
 			if m.IsKey(key) {
 				d.Type = gob
-				d.Prop = "phone"
-				found = true
 				break
 			}
 		}
 
-	} else if m.IsTablet() {
-		d.IsMobile = true
+	} else if d.Prop == "tablet" {
 		for key, gob := range maptab {
 			if m.IsKey(key) {
 				d.Type = gob
-				d.Prop = "tablet"
-				found = true
 				break
 			}
 		}
-	}
-
-	if !found && d.IsMobile {
-		d.Prop = "phone"
 	}
 }
 
